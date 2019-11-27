@@ -8,16 +8,15 @@ As a team we have decided to implement a Field-Aware Factor Machine model to pre
 ### Erik:
 
 Work performed:
-I performed the EDA for Section 3 of the report in which I calculated the distinct values and null values in each field 
+- I performed the EDA for Section 3 of the report in which I calculated the distinct values and null values in each field 
 discovering that the data will be highly sparse. The sparsity of the data poses a big challenge to us and will be used to 
 guide our effort in feature engineering which I work with Noah to implement.
-
-I also collaborated with Connor on Section 2 giving him feedback on the content he wrote.
+- I also collaborated with Connor on Section 2 giving him feedback on the content he wrote.
 
 Future work:
-As a next step, I will work with Anu on implementing the home-grown large scale solution we will run on the assigned 
-dataset in Section 4 
-Make notes on the key points to include in Section 5.
+- As a next step, I will work with Anu on implementing the home-grown large scale solution we will run on the assigned 
+dataset in Section 4. 
+- Make notes on the key points to include in Section 5.
 
 ### Noah:
 I’ve focused on EDA, hashing features and will be orchestrating runs on GCP. Similar to Eric, I looked at the type and 
