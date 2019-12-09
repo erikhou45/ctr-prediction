@@ -125,13 +125,13 @@ def kappa(y, features, W):
 
 # Test Train Split
 train_df, test_df = train_parquet_hashed.randomSplit([0.8, 0.2])
-batches = train_df.randomSplit([0.1] * 10)
+batches = train_df.randomSplit([0.01] * 100)
 
 # Initialize model parameters
 k = 2
 n_features = 50000
 n_fields = 39
-eta = 0.4
+eta = 0.3
 reg_c = 0.1
 sc.broadcast(k)
 sc.broadcast(n_features)
@@ -176,19 +176,18 @@ def gd_update(dataRDD, W):
 
 def gradient_descent(split_data, w_init, n_steps = 10):
     
-    W = sc.broadcast(w_init)
+    model = sc.broadcast(w_init)
 
-    n_steps = 10
     start = time.time()
     for i in range(n_steps):
         train_rdd = split_data[i].rdd
         print("----------")
         print(f"STEP: {i+1}")
-        new_model = gd_update(train_rdd, W.value)
-        W = sc.broadcast(new_model)
-        train_loss = log_loss(train_rdd, W.value)
+        new_model = gd_update(train_rdd, model.value)
+        model = sc.broadcast(new_model)
+        train_loss = log_loss(train_rdd, model.value)
         print(f"Training Loss: {train_loss}")
-        test_loss = log_loss(split_data[(i + 1) % n_steps].rdd, W.value)
+        test_loss = log_loss(split_data[i + 50].rdd, model.value)
         print(f"Test Loss: {test_loss}")
     print(f"\n... trained {n_steps} iterations in {time.time() - start} seconds")
 
