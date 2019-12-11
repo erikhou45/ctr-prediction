@@ -71,7 +71,7 @@ train_parquet_reduced_dimensions = train_parquet_MD
 
 # Bin numeric variables
 for col in intFieldNames:
-    train_parquet_reduced_dimensions = train_parquet_reduced_dimensions.withColumn(col, F.floor(F.log(F.col(col) + 1)))
+    train_parquet_reduced_dimensions = train_parquet_reduced_dimensions.withColumn(col, F.floor(F.log(F.col(col) + F.lit(2))))
 
 # Hash Features
 n_features = 50000
